@@ -1,0 +1,218 @@
+<%#
+ Copyright 2013-2018 the original author or authors from the JHipster project.
+
+ This file is part of the JHipster project, see https://www.jhipster.tech/
+ for more information.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-%>
+package <%=packageName%>.domain.enumeration;
+
+import java.util.ArrayList;
+import java.util.List;
+import <%=packageName%>.service.util.StringUtil;
+
+/**
+ * Ministério Público do Estado de Rondônia
+ * Diretoria de Tecnologia da Informação
+ * Departamento de Desenvolvimento de Sistemas
+ *
+ * ContentType.java
+ * Enumeração para tipos de conteúdo de arquivos.
+ *
+ * Projeto template
+ * Pacote [main]br.mp.mpro.template.enumeration
+ *
+ * @since 22.08.2016
+ */
+public enum ContentType {
+
+    ADOBE_PDF("ADOBE_PDF", "adobe/pdf", ".pdf"),
+    APPLICATION_CSV("APPLICATION_CSV", "application/csv", ".csv"),
+    APPLICATION_DOWNLOAD("APPLICATION_DOWNLOAD", "application/download", ".pdf"),
+    APPLICATION_FORCE_DOWNLOAD("APPLICATION_FORCE_DOWNLOAD", "application/force-download", ".pdf"),
+    APPLICATION_MS_EXCEL("APPLICATION_MS_EXCEL", "application/vnd.ms-excel", ".xls"),
+    APPLICATION_MS_POWERPOINT("APPLICATION_MS_POWERPOINT", "application/vnd.ms-powerpoint", ".ppt"),
+    APPLICATION_MS_WORD("APPLICATION_MS_WORD", "application/msword", ".doc"),
+    APPLICATION_OCTET_STREAM("APPLICATION_OCTET_STREAM", "application/octet-stream", ".oct"),
+    APPLICATION_PDF("APPLICATION_PDF", "application/pdf", ".pdf"),
+    APPLICATION_PKCS_7("APPLICATION_PKCS7", "application/pkcs7", ".pkcs7"),
+    APPLICATION_PKCS_7_MIME("APPLICATION_PKCS7_MIME", "application/pkcs7-mime", ".pdf"),
+    APPLICATION_PKCS_7_SIGNATURE("APPLICATION_PKCS7_SIGNATURE", "application/pkcs7-signature", ".pdf"),
+    APPLICATION_SAVE("APPLICATION_SAVE", "application/save", ".pdf"),
+    APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT("APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT", "application/vnd.oasis.opendocument.text", ".odt"),
+    APPLICATION_X_DOWNLOAD("APPLICATION_X_DOWNLOAD", "application/x-download", ".pdf"),
+    APPLICATION_X_MSDOWNLOAD("APPLICATION_X_MSDOWNLOAD", "application/x-msdownload", ".pdf"),
+    APPLICATION_X_OCTET_STREAM("APPLICATION_X_OCTET_STREAM", "application/x-octet-stream", ".pdf"),
+    APPLICATION_X_PDF("APPLICATION_X_PDF", "application/x-pdf", ".pdf"),
+    APPLICATION_X_REAL("APPLICATION_X_REAL", "application/x-real", ".pdf"),
+    APPLICATION_X_UNKNOWN("APPLICATION_X_UNKNOWN", "application/x-unknown", ".pdf"),
+    BINARY_OCTET_STREAM("BINARY_OCTET_STREAM", "binary/octet-stream", ".pdf"),
+    IMAGE_BMP("IMAGE_BMP", "image/bmp", ".bmp"),
+    IMAGE_GIF("IMAGE_GIF", "image/gif", ".gif"),
+    IMAGE_JPEG("IMAGE_JPEG", "image/jpeg", ".jpeg"),
+    IMAGE_PNG("IMAGE_PNG", "image/png", ".png"),
+    PDF("PDF", "application/pdf", ".pdf"),
+    TEXT_CSS("TEXT_CSS", "text/css", ".css"),
+    TEXT_HTML("TEXT_HTML", "text/html", ".html"),
+    TEXT_PDF("TEXT_PDF", "text/pdf", ".pdf"),
+    TEXT_PLAIN("TEXT_PLAIN", "text/plain", ".txt"),
+    TEXT_XML("TEXT_XML", "text/xml", ".xml"),
+    VIDEO_MP4("VIDEO_MP4", "video/mp4", ".mp4"),
+    X_UNKNOWN_STREAM("X_UNKNOWN_STREAM", "x-unknown/stream", ".pdf");
+
+    private String valor;
+    private String mime;
+    private String extensao;
+
+    //=======================================================
+    // Construtor.
+    //=======================================================
+    ContentType(String valor, String mime, String extensao) {
+        this.valor = valor;
+        this.mime = mime;
+        this.extensao = extensao;
+    }
+
+    //=======================================================
+    // PUBLIC
+    //=======================================================
+
+    /**
+     * Valor de determinado item da enumeração.
+     *
+     * @return String
+     * @since 22.08.2016
+     */
+    public String getValor() {
+        return valor;
+    }
+
+    /**
+     * MIME de determinado item da enumeração.
+     *
+     * @return String
+     * @since 22.08.2016
+     */
+    public String getMime() {
+        return mime;
+    }
+
+    /**
+     * Extensão suportada de determinado item da enumeração.
+     *
+     * @return String
+     * @since 22.08.2016
+     */
+    public String getExtensao() {
+        return extensao;
+    }
+
+    /**
+     * Retorna um item da enumeração, dado o valor.
+     *
+     * @param valor
+     * @return ContentType
+     * @since 22.08.2016
+     */
+    public static ContentType comValor(String valor) {
+        if (!StringUtil.contemNulo(valor)) {
+            for (ContentType c : ContentType.values()) {
+                if (c.valor.equals(valor.replace("/", "_").replace("-", "_").toUpperCase())) {
+                    return c;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retorna os itens da enumeração com determinada extensão.
+     *
+     * @param extensao
+     * @return List
+     * @since 22.08.2016
+     */
+    public static List<ContentType> comExtensao(String extensao) {
+        List<ContentType> contents = new ArrayList<>();
+        if (!StringUtil.contemNulo(extensao)) {
+            for (ContentType c : ContentType.values()) {
+                if (c.getExtensao().equals(extensao)) {
+                    contents.add(c);
+                }
+            }
+        }
+        return contents;
+    }
+
+    /**
+     * Verifica se determinado conteúdo é HTML ou relacionado.
+     *
+     * @param contentType
+     * @return boolean
+     * @since 22.08.2016
+     */
+    public static boolean isHtml(ContentType contentType) {
+        return comExtensao(TEXT_CSS.getExtensao()).contains(contentType)
+                || comExtensao(TEXT_HTML.getExtensao()).contains(contentType)
+                || comExtensao(TEXT_PLAIN.getExtensao()).contains(contentType)
+                || comExtensao(TEXT_XML.getExtensao()).contains(contentType);
+    }
+
+    /**
+     * Verifica se determinado conteúdo é PDF.
+     *
+     * @param contentType
+     * @return boolean
+     * @since 22.08.2016
+     */
+    public static boolean isPdf(ContentType contentType) {
+        return comExtensao(APPLICATION_PDF.getExtensao()).contains(contentType);
+    }
+
+    /**
+     * Verifica se determinado conteúdo é PKCS7.
+     *
+     * @param contentType
+     * @return boolean
+     * @since 22.08.2016
+     */
+    public static boolean isPkcs(ContentType contentType) {
+        return comExtensao(APPLICATION_PKCS_7.getExtensao()).contains(contentType);
+    }
+
+    /**
+     * Verifica se determinado conteúdo é imagem.
+     *
+     * @param contentType
+     * @return boolean
+     * @since 22.08.2016
+     */
+    public static boolean isImagem(ContentType contentType) {
+        return comExtensao(IMAGE_BMP.getExtensao()).contains(contentType)
+                || comExtensao(IMAGE_GIF.getExtensao()).contains(contentType)
+                || comExtensao(IMAGE_JPEG.getExtensao()).contains(contentType)
+                || comExtensao(IMAGE_PNG.getExtensao()).contains(contentType);
+    }
+
+    /**
+     * Verifica se determinado conteúdo é mídia.
+     *
+     * @param contentType
+     * @return boolean
+     * @since 22.08.2016
+     */
+    public static boolean isMidia(ContentType contentType) {
+        return comExtensao(VIDEO_MP4.getExtensao()).contains(contentType);
+    }
+}

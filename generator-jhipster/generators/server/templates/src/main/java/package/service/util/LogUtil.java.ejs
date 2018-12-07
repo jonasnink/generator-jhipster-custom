@@ -1,0 +1,95 @@
+package <%=packageName%>.service.util;
+
+import <%=packageName%>.exception.AppException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * Ministério Público do Estado de Rondônia
+ * Diretoria de Tecnologia da Informação
+ * Departamento de Desenvolvimento de Sistemas
+ *
+ * LogUtil.java (CFT)
+ * Classe com métodos utilitários para logs.
+ *
+ * Projeto template
+ * Pacote [main]br.mp.mpro.template.util
+ *
+ * @see "src/main/resources/log4j.properties"
+ *
+ * @see "http://www.caelum.com.br/apostila-java-testes-xml-design-patterns/apendice-logging-com-log4j/#12-4-exercicios-adicionando-logging-com-log4j"
+ * @see "https://www.mkyong.com/logging/log4j-hello-world-example/"
+ * @see "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html"
+ *
+ * @since 09.08.2016
+ */
+public class LogUtil {
+
+    // =======================================================
+    // PUBLIC
+    // =======================================================
+
+    /**
+     * Imprime mensagem de log (debug) na saída definida, com stack trace.
+     *
+     * @param mensagem
+     * @param clazz
+     * @since 10.08.2016
+     */
+    public static void debug(String mensagem, Exception excecao, Class<?> clazz) {
+        Logger logger = LoggerFactory.getLogger(clazz);
+        logger.debug(String.format("%s", mensagem));
+        excecao.printStackTrace();
+    }
+
+    /**
+     * Imprime mensagem de log (erro) na saída definida.
+     *
+     * @param mensagem
+     * @param clazz
+     * @since 09.08.2016
+     */
+    public static void error(String mensagem, Class<?> clazz) {
+        Logger logger = LoggerFactory.getLogger(clazz);
+        logger.error(String.format("%s", mensagem));
+    }
+
+    /**
+     * Imprime mensagem de log (erro) na saída definida e lança exceção correspondente.
+     *
+     * @param mensagem
+     * @param excecao
+     * @param clazz
+     * @throws AppException
+     * @since 09.08.2016
+     */
+    public static void error(String mensagem, Exception excecao, Class<?> clazz) throws AppException {
+        Logger logger = LoggerFactory.getLogger(clazz);
+        logger.error(String.format("%s", mensagem));
+        throw new AppException(mensagem, excecao);
+    }
+
+    /**
+     * Imprime mensagem de log (info) na saída definida.
+     *
+     * @param mensagem
+     * @param clazz
+     * @since 10.08.2016
+     */
+    public static void info(String mensagem, Class<?> clazz) {
+        Logger logger = LoggerFactory.getLogger(clazz);
+        logger.info(String.format("%s", mensagem));
+    }
+
+    /**
+     * Imprime mensagem de log (warn) na saída definida.
+     *
+     * @param mensagem
+     * @param clazz
+     * @since 10.08.2016
+     */
+    public static void warn(String mensagem, Class<?> clazz) {
+        Logger logger = LoggerFactory.getLogger(clazz);
+        logger.warn(String.format("%s", mensagem));
+    }
+}

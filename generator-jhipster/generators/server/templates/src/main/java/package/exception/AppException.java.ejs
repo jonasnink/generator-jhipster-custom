@@ -1,0 +1,81 @@
+package <%=packageName%>.exception;
+
+import java.io.Serializable;
+
+/**
+ * Ministério Público do Estado de Rondônia
+ * Diretoria de Tecnologia da Informação
+ * Departamento de Desenvolvimento de Sistemas
+ *
+ * AppException.java (CFT)
+ * Classe padrão de exceções para a aplicação.
+ *
+ * Projeto template
+ * Pacote [main]br.mp.mpro.template.exception
+ *
+ * @see "https://www.caelum.com.br/apostila-java-orientacao-objetos/excecoes-e-controle-de-erros/"
+ * @see "http://howtodoinjava.com/best-practices/java-exception-handling-best-practices/"
+ *
+ * @since 26.07.2016
+ */
+public class AppException extends Exception implements Serializable {
+
+	private static final long serialVersionUID = 12L;
+
+	private String mensagem;
+	private Exception excecao;
+
+	//=======================================================
+	// Construtor.
+	//=======================================================
+	public AppException(String mensagem, Exception excecao) {
+		super(mensagem, excecao);
+		this.mensagem = mensagem;
+		this.excecao = excecao;
+	}
+
+	//=======================================================
+	// PUBLIC
+	//=======================================================
+
+	/**
+	 * Retorna a mensagem informada no momento do lançamento da exceção.
+	 *
+	 * @return String
+	 * @since 26.07.2016
+	 */
+	@Override
+	public String toString() {
+		return mensagem;
+	}
+
+	/**
+	 * Retorna a mensagem informada no momento do lançamento da exceção.
+	 *
+	 * @return String
+	 * @since 26.07.2016
+	 */
+	public String getMensagem() {
+		return mensagem;
+	}
+
+	/**
+	 * Retorna a exceção lançada.
+	 *
+	 * @return Exception
+	 * @since 26.07.2016
+	 */
+	public Exception getExcecao() {
+		return excecao;
+	}
+
+	/**
+	 * Retorna a classe de exceção lançada.
+	 *
+	 * @return Class
+	 * @since 26.07.2016
+	 */
+	public Class<?> getClasseExcecao() {
+		return excecao.getClass();
+	}
+}

@@ -1,0 +1,67 @@
+==============================================================================================
+CUSTOMIZAÇÃO DO GENERATOR-JHIPSTER VERSÃO "5.5.0"
+==============================================================================================
+"generator-jhipster\generators\generator-base.js":
+	* Incluído informação de que o generator-jhipster foi customizado.
+"generator-jhipster\generators\app\index.js":
+	* Incluído código para executar o sub-gerador <import-jdl>;
+	* Incluído código para executar o gerador <generator-jhipster-entity-audit>;
+"generator-jhipster\generators\client\files-angular.js":
+	* Incluído codigo para referenciar arquivos extras na geração do cliente:
+		logo.png, footer.scss, footer.css
+"generator-jhipster\generators\client\templates\angular\package.json.ejs":
+	* Removida a dependência => "generator-jhipster": "<%= packagejs.version %>",
+generator-jhipster\generators\client\templates\angular\src\main\webapp\app:
+	* Customização do home:
+		+ Customização do arquivo "home.component.html.ejs"
+	* Customização do layouts\footer
+		+ Customização do arquivo "footer.component.html.ejs"
+		+ Customização do arquivo "footer.component.ts.ejs"
+		+ Criação do arquivo "footer.css.ejs"
+		+ Criação do arquivo "footer.scss.ejs"
+	*Customização do layouts\navbar:
+		+ Customização do arquivo "navbar.html.ejs"
+		+ Customização do arquivo "navbar.css.ejs"
+		+ customização do arquivo "navbar.scss.ejs"
+generator-jhipster\generators\client\templates\angular\src\main\webapp\content:
+	*Customização do images:
+		+ Inclusão do arquivo "logo.png"
+"generator-jhipster\generators\client\templates\angular\webpack\webpack.prod.js.ejs":
+	* Incluído código NECESSÁRIO PARA GERAR O <build> DO PROJETO QUANDO HOUVER MAIS DE UMA PASTA <webapp>. EXEMPLO: webapp e webappCustom, SENDO QUE NESSE CASO 
+          SERÁ NECESSÁRIO TAMBÉM CRIAR UMA CÓPIA DA PASTA <webpack>, EXEMPLO: <webpack>:referenciando a pasta <webappCustom> e <webpackPrototype>: referenciando a pasta <webapp>.
+"generator-jhipster\generators\entity-i18n\files.js":
+	* Altera código para verificar se o arquivo i18n\pt-br\enum.json já existe, caso sim não sobrescreve o arquivo i18n do enum, caso não cria o arquivo i18n referente ao enum.
+"generator-jhipster\generators\entity-server\files.js":
+	* Customizado a geração de domain e dos enums, afim de verificar se existe um enum gerado caso sim não sobrescreve, bem como verificar se existe uma classe de domain customizada gerada caso sim não a sobrescreve, sobrescrevendo neste caso apenas a classes de domainGenerated na pasta generated. E gerando cache para a entidade gerada com sufixo *Generated.
+
+"generator-jhipster\generators\entity-server\templates\src\main\java\package\domain\Entity_custom.java.ejs":
+	* Arquivo criado, sendo esse, uma cópia customizada de Entity.java.ejs
+"generator-jhipster\generators\entity-server\templates\src\main\java\package\domain\Entity.java.ejs":
+	* Arquivo Customizado, sendo incluído um sufixo no nome da classe, <entityGenerated> "replace(<%= entityClass %>, <%= entityClass %>Generated)", bem como modificado o package para domain.generated.
+
+generator-jhipster\generators\server:
+	* Customizado o arquivo "files.js":
+		+ Incluído referência ao arquivo <common.jh>
+		+ Incluído referência aos arquivos <emuns> comuns
+		+ Incluído referência aos arquivos <service> e <exception> comuns
+	* Criado o arquivo templates\common.jh (Arquivo jdl que contem as classes comuns.)
+	* Criado os arquivos templates\src\main\java\package\domain\enumeration:
+		+ ClasseOrgao.java.ejs
+		+ ContentType.java.ejs
+		+ SimNao.java.ejs
+		+ SituacaoServidor.java.ejs
+		+ UnidadeFederativa.java.ejs
+	* Criado os arquivos templates\src\main\java\package\service\util:
+		+ LogUtil.java.ejs
+		+ StringUtil.java.ejs
+	* Criado o arquivo templates\src\main\java\package\exception:
+		+ AppException.java.ejs
+generator-jhipster\generators\server\templates\src\main\resources\config:
+	* Customizado arquivo "application.yml.ejs" para incluir email default da aplicação
+	* Customizado arquivo "application-dev.yml.ejs":
+		+ Definido para o DB Postgresql username:postgres e password:postgres
+		+ Configuração de email
+
+	*Customizado arquivo "application-prod.yml.ejs":
+		+ Definido para o DB Postgresql username:postgres e password:postgres
+		+ Configuração de email

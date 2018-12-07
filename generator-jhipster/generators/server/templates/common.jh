@@ -1,0 +1,120 @@
+enum ClasseOrgao {
+	E,
+    I
+}
+enum ContentType {
+    ADOBE_PDF,
+    APPLICATION_CSV,
+    APPLICATION_DOWNLOAD,
+    APPLICATION_FORCE_DOWNLOAD,
+    APPLICATION_MS_EXCEL,
+    APPLICATION_MS_POWERPOINT,
+    APPLICATION_MS_WORD,
+    APPLICATION_OCTET_STREAM,
+    APPLICATION_PDF,
+    APPLICATION_PKCS_7,
+    APPLICATION_PKCS_7_MIME,
+    APPLICATION_PKCS_7_SIGNATURE,
+    APPLICATION_SAVE,
+    APPLICATION_VND_OASIS_OPENDOCUMENT_TEXT,
+    APPLICATION_X_DOWNLOAD,
+    APPLICATION_X_MSDOWNLOAD,
+    APPLICATION_X_OCTET_STREAM,
+    APPLICATION_X_PDF,
+    APPLICATION_X_REAL,
+    APPLICATION_X_UNKNOWN,
+    BINARY_OCTET_STREAM,
+    IMAGE_BMP,
+    IMAGE_GIF,
+    IMAGE_JPEG,
+    IMAGE_PNG,
+    PDF,
+    TEXT_CSS,
+    TEXT_HTML,
+    TEXT_PDF,
+    TEXT_PLAIN,
+    TEXT_XML,
+    VIDEO_MP4,
+    X_UNKNOWN_STREAM
+}
+enum SimNao {
+	N,
+	S
+}
+enum SituacaoServidor {
+    P,
+	A,
+	I,
+	S
+}
+enum UnidadeFederativa {
+	AC,
+	AL,
+	AP,
+	AM,
+	BA,
+	CE,
+	DF,
+	ES,
+	GO,
+	MA,
+	MT,
+	MS,
+	MG,
+	PA,
+	PB,
+	PR,
+	PE,
+	PI,
+	RJ,
+	RN,
+	RS,
+	RO,
+	RR,
+	SC,
+	SE,
+	SP,
+	TO
+}
+entity Arquivo {
+	nome String,
+    contentType ContentType
+}
+entity Comarca {
+	descricao String maxlength(80),
+    sigla String maxlength(4),
+    unidadeFederativa UnidadeFederativa
+}
+entity Orgao {
+	descricao String maxlength(10),
+    descricaoConjunta String maxlength(150),
+    classeOrgao ClasseOrgao,
+    sigla String maxlength(20),
+    email String maxlength(40),
+    identidade Long,
+    ativo SimNao
+}
+relationship ManyToOne {
+	Orgao{comarca(descricao)} to Comarca
+}
+entity Titularidade {
+	descricao String maxlength(50)
+}
+entity Servidor {
+	nome String maxlength(160),
+    nomeConsulta String maxlength(160),
+    situacao SituacaoServidor,
+    email String,
+    identidade Long
+}
+relationship ManyToOne {
+	Servidor{orgao(descricao)} to Orgao
+}
+relationship ManyToOne {
+    Servidor{titularidade(descricao)} to Titularidade
+}
+
+dto * with mapstruct
+service all with serviceImpl
+paginate * with pagination
+filter Arquivo, Servidor, Orgao, Comarca, Titularidade
