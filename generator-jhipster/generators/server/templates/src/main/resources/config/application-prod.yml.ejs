@@ -186,13 +186,13 @@ spring:
         contexts: prod
     <%_ } _%>
     mail:
-        host: smtp.mpro.mp.br
+        host: smtp.gmail.com
         port: 587
-        username: jonas.nink@mpro.mp.br
-        password: 02b09214
+        username: email
+        password: password
         properties.mail.smtp:
             starttls.enable: true
-            ssl.trust: smtp.mpro.mp.br
+            ssl.trust: smtp.gmail.com
     thymeleaf:
         cache: true
 <%_ if (serviceDiscoveryType || applicationType === 'gateway' || applicationType === 'microservice' || applicationType === 'uaa') { _%>
@@ -332,7 +332,7 @@ jhipster:
             key: <%= rememberMeKey %>
 <%_ } _%>
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: jonas.nink@mpro.mp.br
+        from: email
         base-url: http://my-server-url-to-change # Modify according to your server's URL
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
